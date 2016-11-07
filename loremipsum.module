@@ -28,3 +28,18 @@ phrases and it\'ll do the rest.</p>
       ');
   }
 }
+
+/**
+ * Implements hook_theme().
+ */
+function loremipsum_theme($existing, $type, $theme, $path) {
+  $variables = array (
+    'loremipsum' => array (
+      'variables' => array (
+        'source_text' => NULL,
+      ),
+      'template' => 'loremipsum',
+    ),
+  );
+  return $variables;
+}
