@@ -28,3 +28,5 @@ Attention
 
 Most bugs have been ironed out, holes covered, features added. But this module
 is a work in progress. Please report bugs and suggestions, ok?
+
+As per D8 documentation on 23rd June 2017
