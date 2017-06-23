@@ -25,7 +25,7 @@ class LoremIpsumForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     // Form constructor
     $form = parent::buildForm($form, $form_state);
-    
+
     // Default settings
     $config = $this->config('loremipsum.settings');
 
@@ -41,7 +41,7 @@ class LoremIpsumForm extends ConfigFormBase {
     // Source text field
     $form['source_text'] = array (
       '#type' => 'textarea',
-      '#title => $this->t('Source text from lorem ipsum generation:'),
+      '#title' => $this->t('Source text from lorem ipsum generation:'),
       '#default_value' => $config->get('loremipsum.source_text'),
       '#description' => $this->t('Write one sentence per line. Those sentences will be used to generate random text.'),
     );
