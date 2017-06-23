@@ -55,16 +55,34 @@ class LoremIpsumBlockForm extends FormBase {
     return $form;
   }
 
-  /**
-   * {@inheritdoc}.
+   /**
+   * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $form_state->setRedirect (
+    $phrases = $form_state->getValue('phrases');
+    if (!is_numeric($phrases)) {
+      $form_state->setErrorByName('phrases', $this->t('Please use a number.'));
+    }
+
+    if (floor($phrases) != $phrases) {
+      $form_state->setErrorByName('phrases', $this->t('No decimals, please.'));
+    }
+
+    if ($phrases < 1) {
+      $form_state->setErrorByName('phrases', $this->t('Please use a number greater than zero.'));
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $form_state->setRedirect(
       'loremipsum.generate',
-      array (
+      array(
         'paragraphs' => $form_state->getValue('paragraphs'),
         'phrases' => $form_state->getValue('phrases'),
-      ),
+      )
     );
   }
 }

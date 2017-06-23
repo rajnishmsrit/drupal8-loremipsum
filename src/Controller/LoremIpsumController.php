@@ -3,6 +3,7 @@
 namespace Drupal\loremipsum\Controller;
 
 use Drupal\Core\Url;
+// Change following https://www.drupal.org/node/2457593
 use Drupal\Component\Utility\SafeMarkup;
 
 /**
@@ -18,7 +19,7 @@ class LoremIpsumController {
    * @param string $paragraphs
    *   The amount of paragraphs that need to be generated.
    * @param string $phrases
-   *   The maxium amount of phrases that can be generated inside a paragraph.
+   *   The maximum amount of phrases that can be generated inside a paragraph.
    */
   public function generate($paragraphs, $phrases) {
     // Default settings
@@ -54,10 +55,10 @@ class LoremIpsumController {
       }
       $element['#source_text'][] = SafeMarkup::checkPlain($this_paragraph);
     }
-    
+
     //Give the render array a title, assign a theme function and return it:
     $element['#title'] = SafeMarkup::checkPlain($page_title);
-    
+
     // Theme function
     $element['#theme'] = 'loremipsum';
 

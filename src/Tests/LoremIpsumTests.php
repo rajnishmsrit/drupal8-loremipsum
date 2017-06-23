@@ -17,17 +17,22 @@ class LoremIpsumTests extends WebTestBase {
    */
   public static $modules = array('loremipsum');
 
-  // A simple user
+  /**
+   * A simple user.
+   *
+   * @var object
+   */
   private $user;
 
-  // Perform initial setup tasks that run before every test method.
+  /**
+   * Perform initial setup tasks that run before every test method.
+   */
   public function setUp() {
     parent::setUp();
-    $this->user = $this->DrupalCreateUser(array (
-        'administer site configuration',
-        'generate lorem ipsum',
-      )
-    );
+    $this->user = $this->DrupalCreateUser(array(
+      'administer site configuration',
+      'generate lorem ipsum',
+    ));
   }
 
   /**
@@ -66,18 +71,30 @@ class LoremIpsumTests extends WebTestBase {
       'Source text field has the default value'
     );
 
+    // Test form submission.
+    $this->drupalPostForm(NULL, array(
+      'page_title' => 'Test lorem ipsum',
+      'source_text' => 'Test phrase 1 \nTest phrase 2 \nTest phrase 3 \n',
+    ), t('Save configuration'));
+
+    $this->assertText(
+      'The configuration options have been saved.',
+      'The form was saved correctly.'
+    );
+
     // Test the new values are there
     $this->drupalGet('admin/config/development/loremipsum');
     $this->assertResponse(200);
     $this->assertFieldByName (
       'page_title',
       'Test lorem ipsum',
-      'Page title is OK.',
+      'Page title is OK.'
     );
+
     $this->assertFieldByName (
       'source_text',
       'Test phrase 1 \nTest phrase 2 \nTest phrase 3 \n',
-      'Source text is OK.',
+      'Source text is OK.'
     );
   }
 }
